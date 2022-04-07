@@ -1,0 +1,45 @@
+---
+
+- name: "install miniconda"
+  hosts: <ADD HOSTNAME>
+  connection: ssh
+  become: yes
+  environment:
+   PATH: "~/Documents/miniconda/bin:{{ ansible_env.PATH }}"
+
+  tasks:
+   - name: "System update"
+     command: sudo apt-get update
+    
+   - name: "Download miniconda"
+     command: wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/Documents/miniconda.sh
+     
+   - name: "Make miniconda executable"
+     command: chmod +x miniconda.sh
+     
+   - name: "Install miniconda"
+     command: bash ~/Documents/miniconda.sh -b -p ~/Documents/miniconda
+     
+   - name: List files and folder in home directory
+     shell: 'ls -l'
+     register: command_output
+   - debug: 
+      var: command_output.stdout_lines
+     
+   - name: Check python
+     shell: 'which python'
+     register: command_output
+   - debug: 
+      var: command_output.stdout_lines
+   
+   - name: Install matplotlib
+     shell: '~/Documents/miniconda/bin/conda install -y -c conda-forge matplotlib'
+     register: command_output
+   - debug: 
+      var: command_output.stdout_lines
+     
+   - name: "Install netCDF4"
+     command: ~/Documents/miniconda/bin/conda install -y -c conda-forge netCDF4
+   - name: "Install cartopy"
+     command: ~/Documents/miniconda/bin/conda install -y -c conda-forge cartopy
+     
