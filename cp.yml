@@ -1,0 +1,21 @@
+---
+
+- name: "Read performance"
+  hosts: localhost
+  connection: ssh
+  become: yes
+
+  tasks:
+   - name: "separator for readability"
+     shell: 'echo "........................................................................." >> cpu_performance.txt'
+
+   - name: "Appending date"
+     shell: 'date >> cpu_performance.txt'
+
+   - name: "separator for readability"
+     shell: 'echo "......................................ls..................................." >> cpu_performance.txt'
+
+   - name: "CPU performance"
+     shell: 'sysbench cpu --cpu-max-prime=20000 --threads=4 --time=60 run >> cpu_performance.txt'
+
+
