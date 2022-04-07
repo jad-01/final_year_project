@@ -1,0 +1,20 @@
+---
+
+- name: "Memory Throughput performance"
+  hosts: localhost
+  connection: ssh
+  become: yes
+
+  tasks:
+   - name: "separator for readability"
+     shell: 'echo "........................................................................." >> memory_throughput.txt'
+
+   - name: "Appending date"
+     shell: 'date >> memory_throughput.txt'
+
+   - name: "separator for readability"
+     shell: 'echo "........................................................................." >> memory_throughput.txt'
+
+   - name: "Memory Throughput performance"
+     shell: 'sysbench memory --memory-oper=write --memory-block-size=1K --memory-scope=global --memory-total-size=100G --threads=4 --time=30 run >> memory_throughput.txt'
+
