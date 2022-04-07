@@ -1,0 +1,22 @@
+---
+
+- name: "Sequential Writes performance"
+  hosts: localhost
+  connection: ssh
+  become: yes
+
+  tasks:
+   - name: "separator for readability"
+     shell: 'echo "........................................................................." >> sequential_writes.txt'
+
+   - name: "Appending date"
+     shell: 'date >> sequential_writes.txt'
+
+   - name: "separator for readability"
+     shell: 'echo "........................................................................." >> sequential_writes.txt'
+
+   - name: "Sequential Writes performance"
+     shell: 'sysbench fileio --file-test-mode=seqwr --file-total-size=10G --file-block-size=4K --threads=4 --time=60 run >> sequential_writes.txt'
+
+   - name: "Clear test files for next batch"
+     shell: 'rm -rf test_file.*'
