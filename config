@@ -1,0 +1,14 @@
+Host *
+	AddKeysToAgent yes
+	ForwardX11 yes
+	ServerAliveInterval 60
+
+Host <HOST>-*
+	User <USER>
+	ForwardAgent yes
+	Host aces-id
+	Hostname <HOSTNAME>
+	IdentityFile <SSH KEY PATH FILE>
+	Host <Host>
+	Hostname <User hostname>
+	ProxyCommand ssh -Y <HOST ID> -W %h:%p
