@@ -1,0 +1,23 @@
+---
+
+- name: "Read performance"
+  hosts: localhost
+  connection: ssh
+  become: yes
+
+  tasks:
+   - name: "separator for readability"
+     shell: 'echo "........................................................................." >> random_reads.txt'
+
+   - name: "Appending date"
+     shell: 'date >> random_reads.txt'
+
+   - name: "separator for readability"
+     shell: 'echo "........................................................................." >> random_reads.txt'
+
+   - name: "Prep"
+     shell: 'sysbench fileio --file-total-size=10G prepare'
+
+   - name: "Random read/write performance"
+     shell: 'sysbench fileio --file-test-mode=rndrd --file-total-size=10G --file-block-size=4K --threads=4 --time=60 run >> random_reads.txt'
+
