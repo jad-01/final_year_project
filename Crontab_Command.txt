@@ -1,0 +1,4 @@
+0 * * * * /usr/bin/ansible-playbook /<PATH>/logs/cpu_performance/cp.yml
+0 * * * * /usr/bin/ansible-playbook /<PATH>/logs/memory_throughput/mt.yml
+0 * * * * /usr/bin/ansible-playbook /<PATH>/logs/random_reads/rr.yml
+0 * * * * /usr/bin/ansible-playbook /<PATH>/logs/sequential_writes/sw.yml
