@@ -7,3 +7,8 @@ Python script producing two parallel instances using matplotlib - 1: Live animat
 Stress tested using all available CPU cores
 
 Ansible scripts to automate the benchmark tests using UpCloud (Open Source tooling) which run on an hourly basis using the Linux built in system Cron.
+
+Acknowledgements
+
+- Andy Heap of Reading University
+- Bryan Lawrence of Reading University
